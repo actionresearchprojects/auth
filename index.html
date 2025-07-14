@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>ARC Auth</title>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/6.0.2/firebaseui.js"></script>
+    <link rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/6.0.2/firebaseui.css" />
+    <style>
+      body {
+        font-family: sans-serif;
+        text-align: center;
+        padding-top: 5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>ARC Login</h2>
+    <div id="firebaseui-auth-container"></div>
+    <div id="logged-in-content" style="display:none;">
+      <p>Welcome! You’re logged in.</p>
+      <button onclick="logout()">Log out</button>
+    </div>
+
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDSDdXbJtEHiHDH1pFDYtcsX9DA2t7dgnw",
+        authDomain: "arc-login-149e8.firebaseapp.com",
+        projectId: "arc-login-149e8",
+        storageBucket: "arc-login-149e8.appspot.com",
+        messagingSenderId: "850922873921",
+        appId: "1:850922873921:web:e402b79f1d2559277312c0",
+        measurementId: "G-YFB5R5RK7M"
+      };
+
+      firebase.initializeApp(firebaseConfig);
+
+      const uiConfig = {
+        signInOptions: [
+          firebase.auth.EmailAuthProvider.PROVIDER_ID,
+          firebase.auth.GoogleAuthProvider.PROVIDER_ID
+        ],
+        signInSuccessUrl: window.location.href // stay on same page after login
+      };
+
+      const ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          document.getElementById("firebaseui-auth-container").style.display = "none";
+          document.getElementById("logged-in-content").style.display = "block";
+        } else {
+          ui.start('#firebaseui-auth-container', uiConfig);
+        }
+      });
+
+      function logout() {
+        firebase.auth().signOut();
+      }
+    </script>
+  </body>
+</html>
