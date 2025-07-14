@@ -3,11 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <title>ARC Auth</title>
-    <!-- Firebase Core -->
-    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth.js"></script>
 
-    <!-- Correct FirebaseUI CDN (hosted by Google) -->
+    <!-- Firebase (compat mode for v10+) -->
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
+
+    <!-- FirebaseUI (auth form) -->
     <script src="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.2/firebase-ui-auth.css" />
 
@@ -45,7 +46,7 @@
           firebase.auth.EmailAuthProvider.PROVIDER_ID,
           firebase.auth.GoogleAuthProvider.PROVIDER_ID
         ],
-        signInSuccessUrl: window.location.href // stay on the same page after login
+        signInSuccessUrl: window.location.href // stay on this page after login
       };
 
       const ui = new firebaseui.auth.AuthUI(firebase.auth());
